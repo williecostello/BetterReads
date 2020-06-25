@@ -1,0 +1,10 @@
+# Ignore data & other miscellaneous folders
+data/
+misc/
+viz/
+
+# Ignore compiled files
+__pycache__/
+*.pyc
+notebooks/.ipynb_checkpoints/
+.idea
