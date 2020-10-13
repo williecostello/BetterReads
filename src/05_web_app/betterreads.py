@@ -140,7 +140,7 @@ def get_opinions(sentences, sentence_vectors, cluster_centres, k):
     # Initialize dataframe to store cluster centre sentences
     df = pd.DataFrame()
     
-    # Set the number of cluster centre points to look at when calculating density score
+    # Set the number of cluster centre points to look at when calculating uniformity score
     centre_points = int(len(sentences) * 0.01)
     
     # Loop through number of clusters selected
