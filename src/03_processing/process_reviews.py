@@ -1,8 +1,14 @@
+import argparse
 import os
 from process_utils import clean_reviews, make_sentences, clean_sentences
 
-# Set collection
-goodreads = True
+# Set script arguments
+parser = argparse.ArgumentParser()
+parser.add_argument('-g', '--goodreads', action='store_true', help='Set collection to GoodReads (as opposed to UCSD)')
+args = parser.parse_args()
+
+# Set whether to scrape just the top 300 reviews or 300 reviews from each rating
+goodreads = args.goodreads
 
 # Set file directories
 read_dir = 'data/01_raw/goodreads/' if goodreads \
