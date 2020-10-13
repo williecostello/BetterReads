@@ -3,7 +3,7 @@ from langdetect import detect
 from nltk.tokenize import sent_tokenize
 
 # Function to clean review text
-def clean_reviews(file_name, file_path, goodreads=False):
+def clean_reviews(file_name, file_path):
 
     # Read in CSV as dataframe
     df = pd.read_csv(f'{file_path}{file_name}')
@@ -15,36 +15,9 @@ def clean_reviews(file_name, file_path, goodreads=False):
 
     print(f'Read in {length_orig} reviews, dropping {num_dups} duplicates\n')
 
-    # Define spoiler marker & "...more" strings, and remove from all reviews
+    # Define spoiler marker & remove from all reviews
     spoiler_str_ucsd = '\*\* spoiler alert \*\* \n'
-    spoiler_str_gr = '                    This review has been hidden because it contains spoilers. To view it,\n                    click here.\n\n\n'
-    more_str = '\n...more\n\n'
     df['review'] = df['review'].str.replace(spoiler_str_ucsd, '')
-    df['review'] = df['review'].str.replace(spoiler_str_gr, '')
-    df['review'] = df['review'].str.replace(more_str, '')
-
-    # Scraped reviews from GoodReads typically repeat the first ~500 characters
-    # The following loop removes these repeated characters
-    if goodreads:
-
-        # Create unique review index for each review
-        df.reset_index(inplace=True)
-        df.rename(columns={'index': 'review_index'}, inplace=True)
-
-        # Loop through each row in dataframe
-        for i in range(len(df)):
-
-            # Save review and review's first ~250 characters to variables
-            review = df.iloc[i]['review']
-            review_start = review[2:250]
-
-            # Loop through all of review's subsequent character strings
-            for j in range(3, len(review)):
-
-                # Check if string starts with same sequence as review start
-                if review[j:].startswith(review_start):
-                    # If so, chop off all previous characters from review
-                    df.at[i, 'review'] = review[j:]
 
     # Replace all new line characters
     df['review'] = df['review'].str.replace('\n', ' ')

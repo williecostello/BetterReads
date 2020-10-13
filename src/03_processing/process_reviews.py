@@ -28,7 +28,7 @@ for file_name in file_list[file_index:]:
     print(f'Processing file {file_index} of {num_files}: {file_name}\n')
 
     # Clean file's review text
-    reviews_df = clean_reviews(file_name, read_dir, goodreads)
+    reviews_df = clean_reviews(file_name, read_dir)
 
     # Tokenize reviews into sentences
     all_sentences_df = make_sentences(reviews_df)
