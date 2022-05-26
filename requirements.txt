@@ -8,5 +8,5 @@ scikit-learn==0.23.1
 seaborn==0.10.1
 selenium==3.141.0
 streamlit==0.61.0
-tensorflow==2.6.4
+tensorflow==2.7.2
 tensorflow-hub==0.8.0
